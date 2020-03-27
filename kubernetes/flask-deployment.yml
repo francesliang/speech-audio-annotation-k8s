@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask
+  labels:
+    name: flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask
+        image: speech-audio-annotation_flask:latest
+        imagePullPolicy: Never
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /app/.gcp/Audio-Stream-177f9e58ecfc.json
+      restartPolicy: Always
+          
