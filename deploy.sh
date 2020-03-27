@@ -18,10 +18,10 @@ pushd ./speech-audio-annotation-ui
 docker build -t speech-audio-annotation-ui_react:latest .
 popd
 
-echo "Createing the flask deployment and service..."
+echo "Creating the flask deployment and service..."
 
-kubectl create -f ./kubernetes/flask-deployment.yml
-kubectl create -f ./kubernetes/flask-service.yml
+kubectl apply -f ./kubernetes/flask-deployment.yml
+kubectl apply -f ./kubernetes/flask-service.yml
 
 
 echo "Adding the ingress..."
@@ -32,5 +32,5 @@ kubectl apply -f ./kubernetes/minikube-ingress.yml
 
 echo "Creating the react deployment and service..."
 
-kubectl create -f ./kubernetes/react-deployment.yml
-kubectl create -f ./kubernetes/react-service.yml
+kubectl apply -f ./kubernetes/react-deployment.yml
+kubectl apply -f ./kubernetes/react-service.yml
