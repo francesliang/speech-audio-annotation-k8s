@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: react
-        image: speech-audio-annotation-ui_audio-annotation-ui:latest
+        image: speech-audio-annotation-ui_react:latest
         imagePullPolicy: Never
       restartPolicy: Always
