@@ -1,0 +1,3 @@
+[submodule "speech-audio-annotation"]
+	path = speech-audio-annotation
+	url = git@github.com:francesliang/speech-audio-annotation.git
