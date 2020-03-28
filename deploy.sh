@@ -15,7 +15,7 @@ docker build -t speech-audio-annotation_flask:latest .
 popd
 
 pushd ./speech-audio-annotation-ui
-docker build -t speech-audio-annotation-ui_react:latest .
+docker build -f Dockerfile-k8s -t speech-audio-annotation-ui_react:latest .
 popd
 
 echo "Creating the flask deployment and service..."
@@ -28,6 +28,7 @@ echo "Adding the ingress..."
 
 minikube addons enable ingress
 kubectl apply -f ./kubernetes/minikube-ingress.yml
+echo "$(minikube ip) speech.annotation" | sudo tee -a /etc/hosts
 
 
 echo "Creating the react deployment and service..."
