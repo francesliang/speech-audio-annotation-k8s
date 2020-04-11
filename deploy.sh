@@ -8,6 +8,12 @@ echo "Setting docker env..."
 
 eval $(minikube docker-env)
 
+echo "Creating persistent volumes and claims"
+
+kubectl apply -f ./kubernetes/persistent-volume.yml
+kubectl apply -f ./kubernetes/persistent-volume-claim.yml
+
+
 echo "Building system images for both backend and frontend..."
 
 pushd ./speech-audio-annotation
