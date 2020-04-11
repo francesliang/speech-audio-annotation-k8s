@@ -14,10 +14,17 @@ spec:
       labels:
         app: flask
     spec:
+      volumes:
+        - name: output-pv-storage
+          persistentVolumeClaim:
+            claimName: output-pv-claim
       containers:
       - name: flask
         image: speech-audio-annotation_flask:latest
         imagePullPolicy: Never
+        volumeMounts:
+          - mountPath: "/app/outputs/trained_models"
+            name: output-pv-storage
         env:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /app/.gcp/Audio-Stream-177f9e58ecfc.json
