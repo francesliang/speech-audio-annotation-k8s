@@ -17,6 +17,7 @@ kubectl apply -f ./kubernetes/persistent-volume-claim.yml
 echo "Building system images for both backend and frontend..."
 
 pushd ./speech-audio-annotation
+git clone https://github.com/mozilla/DeepSpeech models/deepspeech/DeepSpeech
 docker build -t speech-audio-annotation_flask:latest .
 popd
 
