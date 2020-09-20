@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: gke-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "speech-annotation-ip"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: react
+          servicePort: 3000
+      - path: /upload
+        backend:
+          serviceName: flask
+          servicePort: 5000
+      - path: /infer
+        backend:
+          serviceName: flask
+          servicePort: 5000
+      - path: /recognise 
+        backend:
+          serviceName: flask
+          servicePort: 5000
+      - path: /annotate
+        backend:
+          serviceName: flask
+          servicePort: 5000
+      - path: /get_audio
+        backend:
+          serviceName: flask
+          servicePort: 5000
+      - path: /get_audio_clips
+        backend:
+          serviceName: flask
+          servicePort: 5000
+      - path: /train
+        backend:
+          serviceName: flask
+          servicePort: 5000

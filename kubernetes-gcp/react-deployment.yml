@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react
+  labels:
+    name: react
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react
+  template:
+    metadata:
+      labels:
+        app: react
+    spec:
+      containers:
+      - name: react
+        image: gcr.io/speech-audio-annotation/speech-audio-annotation-ui_react:v1.0
+        imagePullPolicy: Always
+      restartPolicy: Always

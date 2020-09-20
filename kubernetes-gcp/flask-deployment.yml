@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask
+  labels:
+    name: flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      volumes:
+        - name: output-pv-storage
+          persistentVolumeClaim:
+            claimName: output-pv-claim
+      containers:
+      - name: flask
+        image: gcr.io/speech-audio-annotation/speech-audio-annotation_flask:v1.0
+        resources:
+          requests:
+            memory: "4Gi"
+        volumeMounts:
+          - mountPath: "/app/outputs/data/"
+            name: output-pv-storage
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /app/.gcp/Audio-Stream-177f9e58ecfc.json
+      restartPolicy: Always
+          
