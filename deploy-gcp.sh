@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#echo "Create a new GKE cluster..."
-#
-#CLUSTER_NAME=speech-audio-annotation
-#gcloud container clusters create $CLUSTER_NAME --num-nodes=2 --machine-type=n1-standard-2
+echo "Create a new GKE cluster..."
+
+CLUSTER_NAME=speech-audio-annotation
+gcloud container clusters create $CLUSTER_NAME --num-nodes=2 --machine-type=n1-standard-2
 
 
-#echo "Reserve a new static IP on GCP..."
-#gcloud compute addresses create speech-annotation-ip --global
+echo "Reserve a new static IP on GCP..."
+gcloud compute addresses create speech-annotation-ip --global
 
 
 echo "Setting env for gcp..."
@@ -15,8 +15,12 @@ echo "Setting env for gcp..."
 export PROJECT_ID=speech-audio-annotation
 CLUSTER_NAME=speech-audio-annotation
 
-gcloud container clusters get-credential $CLUSTER_NAME
+gcloud container clusters get-credentials $CLUSTER_NAME
 
+
+echo "Setting up NGINX ingress controller..."
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.35.0/deploy/static/provider/cloud/deploy.yaml
 
 echo "Creating persistent volume claims"
 
